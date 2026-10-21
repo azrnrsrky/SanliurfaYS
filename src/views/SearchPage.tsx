@@ -1,0 +1,8 @@
+import React, { useEffect, useState, type ReactNode } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import { announcements, competitions, documents, faqs, technologyGuides, trainings } from '../data';
+import { matches } from '../logic';
+import { Empty, SectionTitle, SearchBar } from '../components/ui';
+
+export default function SearchPage(){const [params]=useSearchParams();const q=params.get('q')||'';const entries=[...documents.map(d=>({...d,label:'Belge',path:'/belgeler/'+d.id})),...trainings.map(d=>({...d,label:'Eğitim',path:'/egitimler/'+d.id})),...competitions.map(d=>({...d,label:'Yarışma',path:'/yarismalar/'+d.id})),...announcements.map(d=>({...d,label:'Duyuru',path:'/duyurular/'+d.id})),...technologyGuides.map(d=>({...d,label:'Teknoloji Rehberi',path:'/teknoloji/'+d.id})),...faqs.map(d=>({...d,label:'Sık Sorulan Soru',path:'/sss/'+d.id}))];const result=q.trim()?entries.filter(e=>matches(q,e.title,e.description)):[];return <><SectionTitle title="Aradığınız bilgiye ulaşın" description="Belgelerden eğitimlere, bütün rehber tek bir aramada."/><SearchBar/>{q.trim()?<><p className="search-count">“{q}” için {result.length} sonuç</p>{result.map(r=><Link className="result" to={r.path} key={r.path}><div><span className="tag">{r.label}</span><h2>{r.title}</h2><p>{r.description}</p></div><ArrowUpRight size={20}/></Link>)}{!result.length&&<Empty title="Aramanızla eşleşen içerik bulunamadı" text="Yazımı kontrol edin veya farklı bir anahtar sözcük deneyin."/>}</>:<Empty title="Ne keşfetmek istersiniz?" text="Örneğin “robotik”, “eğitim” veya “etkileşimli tahta” arayın."/>}</>}

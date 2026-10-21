@@ -1,0 +1,6 @@
+import React, { useEffect, useState, type ReactNode } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { ChevronRight, Home, QrCode, ShieldCheck } from 'lucide-react';
+import { modules } from '../navigation';
+
+export default function Sidebar({open,onClose}:{open:boolean;onClose:()=>void}){return <><div className={`menu-overlay ${open?'visible':''}`} onClick={onClose}/><aside className={`sidebar ${open?'open':''}`}><Link className="side-brand" to="/" onClick={onClose}><img src="/assets/yenilikci-sinif.png" alt=""/><span>Şanlıurfa<strong>Yenilikçi Sınıflar</strong></span></Link><span className="side-label">KEŞFET & ÖĞREN</span><nav aria-label="Ana menü"><NavLink end to="/" onClick={onClose}><Home size={19}/>Ana Sayfa</NavLink>{modules.map(m=><NavLink key={m.path} to={m.path} onClick={onClose}><m.icon size={19}/>{m.title}</NavLink>)}</nav><Link to="/qr" onClick={onClose} className="qr-side"><QrCode size={19}/><span>Rehber her zaman yanınızda<small>QR erişim afişi</small></span><ChevronRight size={16}/></Link><div className="side-bottom"><ShieldCheck size={17}/><span>Bilgiye açık, verinize saygılı.<small>Üyelik yok · İzleme yok</small></span></div></aside></>}

@@ -1,0 +1,8 @@
+import React, { useEffect, useState, type ReactNode } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { ArrowRight, FileText, Info } from 'lucide-react';
+import { documents } from '../data';
+import { matches } from '../logic';
+import { Ext, Empty, SectionTitle, Chips, LocalSearch } from '../components/ui';
+
+export default function DocumentCenter(){const [q,setQ]=useState(''),[cat,setCat]=useState('Tümü');const {id}=useParams();const items=documents.filter(d=>(!id||d.id===id)&&(cat==='Tümü'||d.category===cat)&&matches(q,d.title,d.description,d.category));return <><SectionTitle title="Belgeler ve Şablonlar" description="Dersinize ve sınıfınıza hazırlık için kaynaklar, şablonlar ve kılavuzlar."/><LocalSearch value={q} onChange={setQ} label="Belgelerde ara"/><Chips items={['Tümü',...new Set(documents.map(d=>d.category))]} value={cat} onChange={setCat}/><div className="content-grid">{items.map(d=><article className="resource-card" key={d.id}><div className="resource-top"><span className="module-icon"><FileText size={24}/></span><span className="tag">{d.type}</span></div><span className="eyebrow">{d.category}</span><h2>{d.title}</h2><p>{d.description}</p>{d.date&&<small>{d.date}</small>}{d.url?(d.url.startsWith("#/")?<Link to={d.url.slice(1)} className="button secondary">Görüntüle <ArrowRight size={16}/></Link>:<Ext href={d.url}>Görüntüle</Ext>):<span className="pending"><Info size={15}/> Belge bağlantısı eklenecek</span>}</article>)}</div>{!items.length&&<Empty title="Aramanızla eşleşen belge bulunamadı" text="Farklı bir sözcük veya kategori deneyin."/>}</>}

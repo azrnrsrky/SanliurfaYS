@@ -1,0 +1,5 @@
+import React, { useEffect, useState, type ReactNode } from 'react';
+import { BookOpen } from 'lucide-react';
+import { Ext, Notice, SectionTitle } from '../components/ui';
+
+export default function Legislation(){return <><SectionTitle title="Mevzuat ve Resmî Kılavuzlar" description="Belgenin güncelliğini ve geçerliliğini doğrudan yayımlayan kurumdan kontrol edin."/><Notice>Belirli belge dosyaları ve yayımlanma tarihleri henüz eklenmedi. Aşağıdaki bağlantılar resmî kaynak merkezleridir; herhangi bir belgenin yürürlükte olduğu varsayılmaz.</Notice><div className="content-grid">{[{title:'MEB mevzuat kaynakları',org:'Millî Eğitim Bakanlığı',url:'https://www.meb.gov.tr/'},{title:'YEĞİTEK yayın ve kılavuzları',org:'Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü',url:'https://yegitek.meb.gov.tr/'}].map(l=><article className="resource-card" key={l.title}><BookOpen size={27}/><h2>{l.title}</h2><dl><dt>Yayımlayan kurum</dt><dd>{l.org}</dd><dt>Tür</dt><dd>Resmî kaynak merkezi</dd><dt>Belge tarihi</dt><dd>Belgeye göre kontrol edilmeli</dd></dl><Ext href={l.url}>Resmî kaynağa git</Ext></article>)}</div></>}

@@ -1,0 +1,43 @@
+{
+  "name": "sanliurfa-rehber",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.2",
+  "scripts": {
+    "dev": "node scripts/run-framework.mjs dev",
+    "build": "node scripts/run-framework.mjs build",
+    "start": "node scripts/start-local.mjs",
+    "check": "tsc --noEmit",
+    "test": "node scripts/verify-all.mjs",
+    "deploy": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js deploy --config dist/server/wrangler.json"
+  },
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-router-dom": "^7.9.0",
+    "lucide-react": "^0.468.0",
+    "qrcode": "^1.5.4",
+    "next": "16.3.4",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "vite": "8.0.13",
+    "typescript": "^5.9.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/qrcode": "^1.5.5",
+    "vinext": "1.0.0-beta.5",
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@cloudflare/workers-types": "4.20260515.1",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
+    "wrangler": "4.92.0",
+    "@types/node": "22.19.19",
+    "react-server-dom-webpack": "19.2.6",
+    "raw-body": "3.0.2",
+    "json-rpc-2.0": "1.7.1"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}
